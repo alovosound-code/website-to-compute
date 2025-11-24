@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Adult Store</title>
+<style>
+/* Общие стили */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #111;
+    color: #eee;
+}
+
+header {
+    background: #1a1a1a;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+header h1 {
+    color: #f1c40f;
+    margin: 0 0 10px 0;
+    font-size: 1.8em;
+}
+
+nav a {
+    color: #f1c40f;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #e67e22;
+}
+
+.container {
+    padding: 20px;
+}
+
+/* Слайдер */
+.slider {
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.slide {
+    min-width: 100%;
+    transition: 0.5s;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.slide-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #f1c40f;
+    font-size: 1.5em;
+    text-shadow: 2px 2px 5px #000;
+}
+
+/* Каталог */
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product {
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+    width: 220px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(241,196,15,0.5);
+}
+
+.product img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+}
+
+.product p {
+    margin: 0 0 10px 0;
+}
+
+button {
+    background: #f1c40f;
+    color: #111;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #e67e22;
+}
+
+/* Корзина */
+#cartItems {
+    list-style: none;
+    padding: 0;
+}
+
+#cartItems li {
+    background: #222;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Фильтр */
+#priceFilter {
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1a1a1a;
+    margin-top: 40px;
+    color: #aaa;
+}
+
+/* Секции */
+section {
+    margin-bottom: 50px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Для настоящих ценителей премиум товаров для взрослых</h1>
+    <nav>
+        <a href="#catalog">Каталог</a>
+        <a href="#profile">Профиль</a>
+        <a href="#cart">Корзина</a>
+        <a href="#privacy">Анонимность</a>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- Слайдер -->
+    <div class="slider" id="slider">
+        <div class="slide"><img src="https://via.placeholder.com/1200x400?text=Премиум+товары+для+мужчин" alt="">
+            <div class="slide-text">Лучшие премиум-игрушки для взрослых</div>
+        </div>
+        <div class="slide"><img src="https://via.placeholder.com/1200x400?text=Элитные+аксессуары" alt="">
+            <div class="slide-text">Качество и анонимность</div>
+        </div>
+        <div class="slide"><img src="https://via.placeholder.com/1200x400?text=Наслаждайтесь+каждым+моментом" alt="">
+            <div class="slide-text">Для настоящих ценителей</div>
+        </div>
+    </div>
+
+    <section id="catalog">
+        <h2>Каталог товаров</h2>
+        <label for="priceFilter">Фильтр по цене:</label>
+        <select id="priceFilter">
+            <option value="all">Все цены</option>
+            <option value="low">До 50$</option>
+            <option value="mid">50$ - 150$</option>
+            <option value="high">150$+</option>
+        </select>
+
+        <div class="catalog" id="products">
+            <!-- Продукты через JS -->
+        </div>
+    </section>
+
+    <section id="cart">
+        <h2>Корзина</h2>
+        <ul id="cartItems"></ul>
+        <p id="cartTotal">Итого: $0</p>
+        <button onclick="checkout()">Оформить заказ</button>
+    </section>
+
+    <section id="profile">
+        <h2>Профиль</h2>
+        <p>Добро пожаловать, ценитель премиума! Здесь вы можете отслеживать свои заказы и настройки аккаунта.</p>
+    </section>
+
+    <section id="privacy">
+        <h2>Анонимность и конфиденциальность</h2>
+        <p>Ваши покупки и данные полностью защищены. Мы используем анонимную упаковку и безопасные платежи. Конфиденциальность наших клиентов — наш приоритет.</p>
+    </section>
+</div>
+
+<footer>
+    &copy; 2025 Premium Adult Store. Все права защищены.
+</footer>
+
+<script>
+// Продукты
+const products = [
+    {id:1, name:"Мастурбатор Deluxe", price:120, img:"https://via.placeholder.com/200x200?text=Мастурбатор"},
+    {id:2, name:"Вибратор простаты Aneros", price:180, img:"https://via.placeholder.com/200x200?text=Aneros"},
+    {id:3, name:"Эрекционное кольцо с вибрацией", price:60, img:"https://via.placeholder.com/200x200?text=Кольцо"},
+    {id:4, name:"Вакуумная помпа", price:90, img:"https://via.placeholder.com/200x200?text=Помпа"},
+    {id:5, name:"Секс-машина Venus", price:300, img:"https://via.placeholder.com/200x200?text=Venus+Machine"}
+];
+
+const cart = [];
+
+function displayProducts(filter="all"){
+    const container = document.getElementById('products');
+    container.innerHTML = "";
+    let filtered = products;
+    if(filter === "low") filtered = products.filter(p => p.price < 50);
+    if(filter === "mid") filtered = products.filter(p => p.price >= 50 && p.price <=150);
+    if(filter === "high") filtered = products.filter(p => p.price > 150);
+
+    filtered.forEach(p => {
+        const div = document.createElement('div');
+        div.className = "product";
+        div.innerHTML = `
+            <img src="${p.img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p>Цена: $${p.price}</p>
+            <button onclick="addToCart(${p.id})">В корзину</button>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function addToCart(id){
+    const product = products.find(p=>p.id===id);
+    cart.push(product);
+    updateCart();
+}
+
+function updateCart(){
+    const list = document.getElementById('cartItems');
+    list.innerHTML = "";
+    let total = 0;
+    cart.forEach(p=>{
+        const li = document.createElement('li');
+        li.textContent = `${p.name} - $${p.price}`;
+        list.appendChild(li);
+        total += p.price;
+    });
+    document.getElementById('cartTotal').textContent = `Итого: $${total}`;
+}
+
+function checkout(){
+    alert("Спасибо за заказ! (это демо, реальный платеж не настроен)");
+    cart.length = 0;
+    updateCart();
+}
+
+document.getElementById('priceFilter').addEventListener('change', (e)=>{
+    displayProducts(e.target.value);
+});
+
+displayProducts();
+
+// Слайдер
+let slideIndex = 0;
+function showSlides() {
+    const slides = document.querySelectorAll(".slide");
+    slides.forEach((s,i)=> s.style.transform = `translateX(-${slideIndex*100}%)`);
+    slideIndex++;
+    if(slideIndex>=slides.length) slideIndex=0;
+}
+setInterval(showSlides, 4000);
+</script>
+
+</body>
+</html>
